@@ -49,11 +49,28 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Fonts\Ubuntu-Bold.ttf" />
+	  <None Remove="Resources\Fonts\Ubuntu-Regular.ttf" />
+	  <None Remove="Resources\Images\butter_cheese.png" />
+	  <None Remove="Resources\Images\bxs_cart.svg" />
 	  <None Remove="Resources\Images\bxs_category.svg" />
 	  <None Remove="Resources\Images\bxs_help.svg" />
 	  <None Remove="Resources\Images\bxs_home.svg" />
 	  <None Remove="Resources\Images\bxs_list.svg" />
 	  <None Remove="Resources\Images\bxs_user.svg" />
+	  <None Remove="Resources\Images\dairy.png" />
+	  <None Remove="Resources\Images\eggs.png" />
+	  <None Remove="Resources\Images\eggs_meat.png" />
+	  <None Remove="Resources\Images\exotic_fruits.png" />
+	  <None Remove="Resources\Images\fruits.png" />
+	  <None Remove="Resources\Images\green_vegetables.png" />
+	  <None Remove="Resources\Images\leafy_vegetables.png" />
+	  <None Remove="Resources\Images\meat.png" />
+	  <None Remove="Resources\Images\milk_curd_yogurt.png" />
+	  <None Remove="Resources\Images\salads.png" />
+	  <None Remove="Resources\Images\seafood.png" />
+	  <None Remove="Resources\Images\seasonal_fruits.png" />
+	  <None Remove="Resources\Images\vegetables.png" />
 	</ItemGroup>
 
 	<ItemGroup>
