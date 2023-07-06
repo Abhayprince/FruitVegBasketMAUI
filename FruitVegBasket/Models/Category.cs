@@ -19,7 +19,5 @@ namespace FruitVegBasket.Models
         public string? Credit { get; set; }
 
         public bool IsMainCategory => ParentId == 0;
-
-
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace FruitVegBasket.Enumerations
+﻿namespace FruitVegBasket.Shared.Enumerations
 {
     public enum OrderStatus
     {

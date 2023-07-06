@@ -1,4 +1,4 @@
-﻿using FruitVegBasket.Enumerations;
+﻿using FruitVegBasket.Shared.Enumerations;
 
 namespace FruitVegBasket.Models
 {
