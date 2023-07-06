@@ -5,6 +5,7 @@
              Shell.NavBarIsVisible="False"
              xmlns:vm="clr-namespace:FruitVegBasket.ViewModels"
              xmlns:models="clr-namespace:FruitVegBasket.Models"
+             xmlns:controls="clr-namespace:FruitVegBasket.Controls"
              x:DataType="vm:HomePageViewModel">
 
     <ContentPage.Resources>
@@ -62,14 +63,59 @@
             </Label.FormattedText>
         </Label>
 
-        <BoxView HeightRequest="15"
-                 Color="Transparent"/>
+        <controls:Spacer Space="15"/>
+
+        <Label Text="Let's order some fresh fruits and vegetables for you"
+               Style="{StaticResource H2}"
+               LineHeight="1.3"
+               Opacity="0.8"
+               />
+        <controls:Spacer Space="20"/>
+
+        <CollectionView ItemsSource="{Binding Offers}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal"
+                                   ItemSpacing="15"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Offer">
+                    <Border StrokeShape="RoundRectangle 20"
+                            StrokeThickness="0"
+                            Background="Transparent"
+                            HeightRequest="180"
+                            WidthRequest="300">
+                        <Grid >
+                            <BoxView Color="{Binding BgColor}"
+                                     Opacity="0.5"/>
+                            <Grid RowDefinitions="Auto, *, Auto"
+                                  Padding="15">
+                                <Label Grid.Row="0"
+                                       Text="{Binding Title, StringFormat='{0} !!!'}"
+                                       Style="{StaticResource H3}"/>
+                                <Label Grid.Row="1"
+                                       Text="{Binding Description}"
+                                       FontSize="16"
+                                       VerticalOptions="Center"/>
+                                <Label Grid.Row="2"
+                                       Text="{Binding Code}"
+                                       Style="{StaticResource H4}"
+                                       HorizontalOptions="Center"
+                                       BackgroundColor="{StaticResource Primary}"
+                                       TextColor="White"
+                                       Padding="10, 5"/>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <controls:Spacer Space="20"/>
 
         <Label Text="Shop by category"
                Style="{StaticResource H2}"/>
 
-        <BoxView HeightRequest="5"
-                 Color="Transparent"/>
+        <controls:Spacer Space="5"/>
 
         <CollectionView ItemsSource="{Binding Categories}">
             <CollectionView.ItemsLayout>
@@ -106,8 +152,7 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <BoxView HeightRequest="15"
-                 Color="Transparent"/>
+        <controls:Spacer Space="15"/>
             
         <Label Text="Popular"
                 Style="{StaticResource H2}"/>
