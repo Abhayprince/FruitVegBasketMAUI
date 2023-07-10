@@ -14,12 +14,17 @@ namespace FruitVegBasket.ViewModels
             _categoryService = categoryService;
         }
         public ObservableCollection<Category> Categories { get; set; } = new();
+        public ObservableCollection<Offer> Offers { get; set; } = new();
 
         public async Task InitializeAsync()
         {
             foreach (var category in await _categoryService.GetMainCategoriesAsync())
             {
                 Categories.Add(category);
+            }
+            foreach (var offer in Offer.GetOffers())
+            {
+                Offers.Add(offer);
             }
         }
     }
