@@ -72,7 +72,8 @@
                />
         <controls:Spacer Space="20"/>
 
-        <CollectionView ItemsSource="{Binding Offers}">
+        <CollectionView ItemsSource="{Binding Offers}"
+                        HeightRequest="180">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Horizontal"
                                    ItemSpacing="15"/>
@@ -117,7 +118,8 @@
 
         <controls:Spacer Space="5"/>
 
-        <CollectionView ItemsSource="{Binding Categories}">
+        <CollectionView ItemsSource="{Binding Categories}"
+                        HeightRequest="175">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Horizontal"
                                    ItemSpacing="12"/>
