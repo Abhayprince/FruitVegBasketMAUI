@@ -24,29 +24,19 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+var mastersGroup = app.MapGroup("/masters")
+                    .AllowAnonymous();
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+mastersGroup.MapGet("/categories", async (DataContext context) =>
+    await context.Categories
+    .AsNoTracking()
+    .ToArrayAsync()
+);
+mastersGroup.MapGet("/offers", async (DataContext context) =>
+    await context.Offers
+    .AsNoTracking()
+    .ToArrayAsync()
+);
 
-app.Run();
+app.Run("https://localhost:12345");
 
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

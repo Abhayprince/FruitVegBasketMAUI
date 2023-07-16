@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using FruitVegBasket.Interfaces;
 using FruitVegBasket.Pages;
 using FruitVegBasket.Services;
 using FruitVegBasket.ViewModels;
@@ -20,7 +21,32 @@ public static class MauiProgram
 			})
             .UseMauiCommunityToolkit();
 
+		builder.Services.AddSingleton<IPlatformHttpMessageHandler>(sp =>
+		{
+#if ANDROID
+			return new Platforms.Android.AndroidHttpMessageHandler();
+#elif IOS
+			return new Platforms.iOS.IosHttpMessageHandler();
+#endif
+		});
+
+		builder.Services.AddHttpClient(Constants.AppConstants.HttpClientName, httpClient =>
+		{
+			var baseAddress = DeviceInfo.Platform == DevicePlatform.Android
+							? "https://10.0.2.2:12345"
+							: "https://localhost:12345";
+
+			httpClient.BaseAddress = new Uri(baseAddress);
+		})
+		.ConfigureHttpMessageHandlerBuilder(configBuilder =>
+		{
+			var platformHttpMessageHandler = configBuilder.Services.GetRequiredService<IPlatformHttpMessageHandler>();
+			configBuilder.PrimaryHandler = platformHttpMessageHandler.GetHttpMessageHandler();
+
+        });
+
 		builder.Services.AddSingleton<CategoryService>();
+		builder.Services.AddTransient<OffersService>();
 		builder.Services.AddSingleton<HomePageViewModel>();
 		builder.Services.AddSingleton<HomePage>();
 

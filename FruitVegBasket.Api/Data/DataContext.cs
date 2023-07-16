@@ -31,6 +31,12 @@ namespace FruitVegBasket.Api.Data
 
             modelBuilder.Entity<User>()
                 .HasData(User.GetInitialUsers());
+
+            modelBuilder.Entity<Category>()
+                .HasData(Category.GetInitialCategories());
+
+            modelBuilder.Entity<Offer>()
+                .HasData(Offer.GetInitialOffers());
         }
     }
 }

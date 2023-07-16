@@ -6,10 +6,14 @@
              xmlns:vm="clr-namespace:FruitVegBasket.ViewModels"
              xmlns:models="clr-namespace:FruitVegBasket.Models"
              xmlns:controls="clr-namespace:FruitVegBasket.Controls"
+             xmlns:converters="clr-namespace:FruitVegBasket.Converter"
              x:DataType="vm:HomePageViewModel">
 
     <ContentPage.Resources>
         <ResourceDictionary>
+
+            <converters:StringToColorConverter x:Key="StringToColor"/>
+
             <Style TargetType="Label" x:Key="H1">
                 <Setter Property="FontSize" Value="24"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
@@ -86,7 +90,7 @@
                             HeightRequest="180"
                             WidthRequest="300">
                         <Grid >
-                            <BoxView Color="{Binding BgColor}"
+                            <BoxView Color="{Binding BgColor, Converter={StaticResource StringToColor}}"
                                      Opacity="0.5"/>
                             <Grid RowDefinitions="Auto, *, Auto"
                                   Padding="15">
