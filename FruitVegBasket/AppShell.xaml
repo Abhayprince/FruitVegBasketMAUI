@@ -9,6 +9,7 @@
     xmlns:pages="clr-namespace:FruitVegBasket.Pages"
     Shell.TabBarBackgroundColor="{StaticResource Mid}"
     Shell.TabBarTitleColor="{StaticResource White}"
+    Shell.TabBarForegroundColor="{StaticResource White}"
     Shell.BackgroundColor="{StaticResource Mid}">
 
     <Shell.Behaviors>
