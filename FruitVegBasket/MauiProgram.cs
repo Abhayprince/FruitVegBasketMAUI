@@ -42,7 +42,6 @@ public static class MauiProgram
 		{
 			var platformHttpMessageHandler = configBuilder.Services.GetRequiredService<IPlatformHttpMessageHandler>();
 			configBuilder.PrimaryHandler = platformHttpMessageHandler.GetHttpMessageHandler();
-
         });
 
 		builder.Services.AddSingleton<CategoryService>();
