@@ -28,6 +28,7 @@ public static class MauiProgram
 #elif IOS
 			return new Platforms.iOS.IosHttpMessageHandler();
 #endif
+			return null;
 		});
 
 		builder.Services.AddHttpClient(Constants.AppConstants.HttpClientName, httpClient =>
@@ -45,6 +46,7 @@ public static class MauiProgram
         });
 
 		builder.Services.AddSingleton<CategoryService>();
+		builder.Services.AddSingleton<ProductsService>();
 		builder.Services.AddTransient<OffersService>();
 		builder.Services.AddSingleton<HomePageViewModel>();
 		builder.Services.AddSingleton<HomePage>();
