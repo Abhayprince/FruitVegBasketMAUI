@@ -1,40 +1,25 @@
-﻿using FruitVegBasket.Constants;
-using FruitVegBasket.Models;
-using System.Text.Json;
+﻿using FruitVegBasket.Models;
 
 namespace FruitVegBasket.Services
 {
-    public class CategoryService
+    public class CategoryService : BaseApiService
     {
-        public CategoryService(IHttpClientFactory httpClientFactory)
+        public CategoryService(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
         {
-            _httpClientFactory = httpClientFactory;
         }
         private IEnumerable<Category>? _categories;
-        private readonly IHttpClientFactory _httpClientFactory;
 
         public async ValueTask<IEnumerable<Category>> GetCategoriesAsync()
         {
             if (_categories is null)
             {
-                var httpClient = _httpClientFactory.CreateClient(AppConstants.HttpClientName);
+                var response = await HttpClient.GetAsync("/masters/categories");
+                var categories = await HandleApiResponseAsync<IEnumerable<Category>>(response, null);
 
-                var response = await httpClient.GetAsync("/masters/categories");
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-                    if (!string.IsNullOrEmpty(content))
-                    {
-                        _categories = JsonSerializer.Deserialize<IEnumerable<Category>?>(content, new JsonSerializerOptions
-                        {
-                            PropertyNameCaseInsensitive = true
-                        });
-                    }
-                }
-                else
-                {
+                if(categories is null)
                     return Enumerable.Empty<Category>();
-                }
+
+                _categories = categories;
             }
             return _categories;
         }
