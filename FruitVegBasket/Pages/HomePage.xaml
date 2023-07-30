@@ -52,6 +52,7 @@
 
     </ContentPage.Resources>
 
+    <Grid>
     <ScrollView>
         <Grid>
             <VerticalStackLayout Padding="10, 15">
@@ -190,4 +191,6 @@
             </Grid>
         </Grid>
     </ScrollView>
+        <controls:CartControl Count="{Binding CartCount}"/>
+    </Grid>
 </ContentPage>

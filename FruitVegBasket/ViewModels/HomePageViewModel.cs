@@ -12,13 +12,15 @@ namespace FruitVegBasket.ViewModels
         private readonly CategoryService _categoryService;
         private readonly OffersService _offersService;
         private readonly ProductsService _productsService;
+        private readonly CartViewModel _cartViewModel;
 
         public HomePageViewModel(CategoryService categoryService, OffersService offersService
-            , ProductsService productsService)
+            , ProductsService productsService, CartViewModel cartViewModel)
         {
             _categoryService = categoryService;
             _offersService = offersService;
             _productsService = productsService;
+            _cartViewModel = cartViewModel;
         }
         public ObservableCollection<Category> Categories { get; set; } = new();
         public ObservableCollection<Offer> Offers { get; set; } = new();
@@ -26,6 +28,9 @@ namespace FruitVegBasket.ViewModels
 
         [ObservableProperty]
         private bool _isBusy = true;
+
+        [ObservableProperty]
+        private int _cartCount;
 
         public async Task InitializeAsync()
         {
@@ -63,6 +68,18 @@ namespace FruitVegBasket.ViewModels
             if (product is not null)
             {
                 product.CartQuantity += count;
+
+                if(count == -1)
+                {
+                    // We are removing from cart
+                    _cartViewModel.RemoveFromCartCommand.Execute(product.Id);
+                }
+                else
+                {
+                    //Adding to cart
+                    _cartViewModel.AddToCartCommand.Execute(product);
+                }
+                CartCount = _cartViewModel.Count;
             }
         }
     }
