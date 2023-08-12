@@ -20,6 +20,9 @@
                 <Setter Property="IsVisible" Value="False"/>
             </DataTrigger>
         </Border.Triggers>-->
+        <Border.GestureRecognizers>
+            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+        </Border.GestureRecognizers>
         <Border.Shadow>
             <Shadow Offset="1, 1"
                     Brush="{StaticResource Primary}"

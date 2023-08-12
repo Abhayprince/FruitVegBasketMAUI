@@ -52,6 +52,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<HomePage>();
 
 		builder.Services.AddSingleton<CartViewModel>();
+		builder.Services.AddTransient<CartPage>();
 
 #if DEBUG
 		builder.Logging.AddDebug();

@@ -1,3 +1,5 @@
+using FruitVegBasket.Pages;
+
 namespace FruitVegBasket.Controls;
 
 public partial class CartControl : ContentView
@@ -79,5 +81,10 @@ public partial class CartControl : ContentView
                 cartControl.AnimateContainer(AnimationType.Pulse);
             }
         }
+    }
+
+    private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(CartPage));
     }
 }

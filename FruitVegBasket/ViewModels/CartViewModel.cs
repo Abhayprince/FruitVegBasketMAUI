@@ -13,6 +13,23 @@ namespace FruitVegBasket.ViewModels
         [ObservableProperty]
         private int _count; //The number of products we have in the cart (Not the quantities of those products)
 
+        [ObservableProperty]
+        private decimal _totalAmount;
+
+        private void RecalculateTotalAmount() => 
+            TotalAmount = CartItems.Sum(c => c.Amount);
+
+        [RelayCommand]
+        private void IncreaseCartItemQuantity(Guid cartItemId)
+        {
+            var item = CartItems.FirstOrDefault(c=> c.Id == cartItemId);
+            if(item is not null)
+            {
+                item.Quantity++;
+                RecalculateTotalAmount();
+            }
+        }
+
         [RelayCommand]
         private void AddToCart(ProductDto product)
         {
@@ -34,6 +51,7 @@ namespace FruitVegBasket.ViewModels
                 CartItems.Add(item);
                 Count = CartItems.Count;
             }
+            RecalculateTotalAmount();
         }
 
         [RelayCommand]
@@ -52,12 +70,14 @@ namespace FruitVegBasket.ViewModels
                     item.Quantity--;
                 }
             }
+            RecalculateTotalAmount();
         }
 
         private void ClearCart()
         {
             CartItems.Clear();
             Count = 0;
+            RecalculateTotalAmount();
         }
     }
 }
